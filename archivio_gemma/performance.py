@@ -51,7 +51,7 @@ def benchmark(data,backend,stop,notify):
 
 if __name__=='__main__':
     import argparse
-    parser=argparse.ArgumentParser();parser.add_argument('--backend',choices=['cpu','vulkan'],default='cpu')
+    parser=argparse.ArgumentParser();parser.add_argument('--backend',choices=['cpu','vulkan','metal'],default='cpu')
     parser.add_argument('--output',type=Path,required=True);args=parser.parse_args()
     result=benchmark(args.output,args.backend,threading.Event(),lambda s:print(s,flush=True))
     print(json.dumps(result['selected']),f"speedup {result['speedup_vs_single']:.2f}x")

@@ -24,7 +24,7 @@ from PySide6.QtWidgets import (
     QListWidgetItem, QSlider, QFrame, QDoubleSpinBox,
 )
 from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput, QVideoSink
-from video_gemma.common import APP, ROOT, DEFAULT_SOURCE, Cancelled, duration
+from video_gemma.common import APP, ROOT, DEFAULT_SOURCE, GPU_BACKEND, GPU_LABEL, Cancelled, duration
 from video_gemma.library import Library
 from video_gemma.media import SUPPORTED, fingerprint
 from video_gemma.model import Engine
@@ -221,8 +221,9 @@ class Window(QMainWindow):
         header.addWidget(label('Motore locale'))
         self.backend = QComboBox()
         self.backend.addItem('CPU', 'cpu')
-        self.backend.addItem('GPU · Vulkan', 'vulkan')
-        selected = backend or ('vulkan' if list(Path('/dev/dri').glob('renderD*')) else 'cpu')
+        self.backend.addItem('GPU · ' + GPU_LABEL, GPU_BACKEND)
+        has_gpu = GPU_BACKEND == 'metal' or list(Path('/dev/dri').glob('renderD*'))
+        selected = backend or (GPU_BACKEND if has_gpu else 'cpu')
         self.backend.setCurrentIndex(self.backend.findData(selected))
         header.addWidget(self.backend)
         outer.addLayout(header)
@@ -914,7 +915,7 @@ def main():
     parser = argparse.ArgumentParser(description='GemmaVideo · ricerca locale in audio e fotogrammi')
     parser.add_argument('--data', type=Path, default=APP / 'dati')
     parser.add_argument('--source', type=Path, help='Cartella iniziale; normalmente viene ricordata l’ultima usata')
-    parser.add_argument('--backend', choices=['cpu', 'vulkan'])
+    parser.add_argument('--backend', choices=['cpu', GPU_BACKEND])
     parser.add_argument('--silent', action='store_true', help='Disabilita l’uscita audio, utile senza una scheda audio')
     args = parser.parse_args()
     app = QApplication(sys.argv[:1])

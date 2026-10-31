@@ -9,3 +9,5 @@ hdbscan==0.8.43
 bertopic==0.17.4
 beautifulsoup4>=4.13,<5
 matplotlib>=3.10,<4
+nltk>=3.9,<4
+lxml>=5,<7

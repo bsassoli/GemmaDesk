@@ -3,6 +3,26 @@
 #include <string.h>
 #include <math.h>
 #include <stdio.h>
+#include <limits.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <unistd.h>
+#ifdef __APPLE__
+#include <mach-o/dyld.h>
+#endif
+/* Writes the running executable's NUL-terminated path; returns its length or -1. */
+ssize_t pd_executable_path(char *path, size_t size) {
+#ifdef __APPLE__
+    char found[PATH_MAX],resolved[PATH_MAX];uint32_t length=sizeof(found);
+    if(_NSGetExecutablePath(found,&length) || !realpath(found,resolved) || strlen(resolved)>=size)return -1;
+    strcpy(path,resolved);return (ssize_t)strlen(path);
+#else
+    ssize_t n=readlink("/proc/self/exe",path,size-1);
+    if(n<0)return -1;
+    path[n]=0;return n;
+#endif
+}
 
 PD_Rect from_fz(fz_rect r) { return (PD_Rect){r.x0,r.y0,r.x1,r.y1}; }
 fz_rect to_fz(PD_Rect r) { return fz_make_rect(r.x0,r.y0,r.x1,r.y1); }

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch the pinned Linux x86_64 runtime and Q8_0 models, then build workers."""
+"""Fetch the pinned llama.cpp runtime and Q8_0 models, then build workers."""
 import argparse
 import hashlib
 from pathlib import Path
@@ -16,8 +16,14 @@ MODELS = {
     'embeddinggemma-2-Q8_0.gguf': '2188ac1deca4b77dffefd603c2776a9d76d9d74ec01841392982ebb840b09135',
     'mmproj-embeddinggemma-2-Q8_0.gguf': 'c4a8a52691ecef40618438928bdf9e68379b854e24166f292592353db0aab64f',
 }
-RUNTIME = 'llama-b11658-bin-ubuntu-vulkan-x64.tar.gz'
-RUNTIME_SHA = '69b648eb609d841f9b91bdc618d81f694ca08bcb5905ef77ff60813fcec256e8'
+RUNTIMES = {
+    ('Linux', 'x86_64'): ('llama-b11658-bin-ubuntu-vulkan-x64.tar.gz',
+                          '69b648eb609d841f9b91bdc618d81f694ca08bcb5905ef77ff60813fcec256e8'),
+    ('Linux', 'AMD64'): ('llama-b11658-bin-ubuntu-vulkan-x64.tar.gz',
+                         '69b648eb609d841f9b91bdc618d81f694ca08bcb5905ef77ff60813fcec256e8'),
+    ('Darwin', 'arm64'): ('llama-b11658-bin-macos-arm64.tar.gz',
+                          '13d377faac6ab7f838e9d7ecba5ea9763fa0c5aee03f8186f26a2e03d6c31e60'),
+}
 
 
 def checksum(path):
@@ -50,13 +56,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--offline', action='store_true')
     args = parser.parse_args()
-    if platform.system() != 'Linux' or platform.machine() not in ('x86_64', 'AMD64'):
-        parser.error('This setup targets Linux x86_64.')
+    target = RUNTIMES.get((platform.system(), platform.machine()))
+    if not target:
+        parser.error('This setup targets Linux x86_64 and macOS on Apple Silicon.')
+    runtime, runtime_sha = target
     for name, digest in MODELS.items():
         fetch(f'{MODEL_URL}/{name}', ROOT / 'modelli/embeddinggemma-2' / name, digest, args.offline)
-    archive = ROOT / 'runtime' / RUNTIME
-    fetch(f'https://github.com/ggml-org/llama.cpp/releases/download/b11658/{RUNTIME}',
-          archive, RUNTIME_SHA, args.offline)
+    archive = ROOT / 'runtime' / runtime
+    fetch(f'https://github.com/ggml-org/llama.cpp/releases/download/b11658/{runtime}',
+          archive, runtime_sha, args.offline)
     with tarfile.open(archive) as bundle:
         bundle.extractall(ROOT / 'runtime', filter='data')
     for project in ('archivio_gemma', 'video_gemma'):

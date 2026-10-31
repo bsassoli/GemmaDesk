@@ -31,7 +31,7 @@ def main():
     parser.add_argument('action', choices=['index', 'search', 'map'])
     parser.add_argument('--source', type=Path, nargs='+')
     parser.add_argument('--data', type=Path, default=ROOT / 'data/my-archive')
-    parser.add_argument('--backend', choices=['cpu', 'vulkan'], default='cpu')
+    parser.add_argument('--backend', choices=['cpu', 'vulkan', 'metal'], default='cpu')
     parser.add_argument('--query')
     parser.add_argument('--scope', choices=['documents', 'passages'], default='passages')
     parser.add_argument('--clusters', type=int, default=0)

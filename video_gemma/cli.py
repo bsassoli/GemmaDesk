@@ -15,7 +15,7 @@ def main():
     parser.add_argument('action', choices=['scan', 'index', 'search'])
     parser.add_argument('--data', type=Path, default=APP / 'dati')
     parser.add_argument('--source', type=Path, default=DEFAULT_SOURCE)
-    parser.add_argument('--backend', choices=['cpu', 'vulkan'], default='cpu')
+    parser.add_argument('--backend', choices=['cpu', 'vulkan', 'metal'], default='cpu')
     parser.add_argument('--step', type=float, choices=[1, 2, 4, 8], default=4)
     parser.add_argument('--ids', type=int, nargs='+')
     parser.add_argument('--query')

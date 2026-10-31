@@ -1,4 +1,4 @@
-/* GemmaVideo native Linux launcher. AGPL-3.0-or-later. */
+/* GemmaVideo native launcher. AGPL-3.0-or-later. */
 #define _POSIX_C_SOURCE 200809L
 #include <errno.h>
 #include <limits.h>
@@ -6,10 +6,19 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#ifdef __APPLE__
+#include <mach-o/dyld.h>
+#endif
 
 int main(int argc, char **argv) {
     char executable[PATH_MAX], app[PATH_MAX];
+#ifdef __APPLE__
+    char found[PATH_MAX];uint32_t found_size=sizeof(found);
+    ssize_t n=-1;
+    if(!_NSGetExecutablePath(found,&found_size) && realpath(found,executable))n=(ssize_t)strlen(executable);
+#else
     ssize_t n=readlink("/proc/self/exe",executable,sizeof(executable)-1);
+#endif
     if(n<0 || n>=(ssize_t)sizeof(executable)-1){perror("GemmaVideo: percorso eseguibile");return 1;}
     executable[n]='\0';
     char *slash=strrchr(executable,'/');

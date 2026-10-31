@@ -8,6 +8,7 @@ from pathlib import Path
 import platform
 import signal
 import statistics
+import subprocess
 import sys
 import tempfile
 import threading
@@ -26,7 +27,7 @@ from examples.make_video import create
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--backend', choices=['cpu', 'vulkan', 'both'], default='cpu')
+    parser.add_argument('--backend', choices=['cpu', 'vulkan', 'metal', 'both'], default='cpu')
     parser.add_argument('--text', type=Path, default=ROOT / 'examples/documents/solar-energy.txt')
     parser.add_argument('--video', type=Path)
     parser.add_argument('--repeats', type=int, default=10)
@@ -40,7 +41,8 @@ def main():
     stop = threading.Event()
     signal.signal(signal.SIGINT, lambda *_: stop.set())
     signal.signal(signal.SIGTERM, lambda *_: stop.set())
-    backends = ['cpu', 'vulkan'] if args.backend == 'both' else [args.backend]
+    gpu_backend = 'metal' if sys.platform == 'darwin' else 'vulkan'
+    backends = ['cpu', gpu_backend] if args.backend == 'both' else [args.backend]
     report = dict(environment=dict(cpu=platform.processor(), platform=platform.platform(),
                                    python=platform.python_version(), numpy=np.__version__,
                                    llama_threads=8, blas_threads=4, text_workers=1, text_batch=1),
@@ -49,6 +51,9 @@ def main():
                                 video_step_seconds=4, input_kind='user' if args.video else 'synthetic',
                                 text_sha256=hashlib.sha256(original.encode()).hexdigest()),
                   measurements=[], status='running')
+    if sys.platform == 'darwin':
+        report['environment']['cpu'] = subprocess.run(['sysctl', '-n', 'machdep.cpu.brand_string'], text=True,
+                                                      capture_output=True).stdout.strip() or platform.processor()
     cpu = Path('/proc/cpuinfo')
     if cpu.exists():
         report['environment']['cpu'] = next((s.split(':', 1)[1].strip() for s in cpu.read_text().splitlines()

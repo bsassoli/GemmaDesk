@@ -2,7 +2,9 @@
 #include "llama.h"
 #include "mtmd.h"
 #include "gpu_device.h"
+#include <cstdio>
 #include <iostream>
+#include <string>
 #include <sstream>
 #include <iomanip>
 #include <vector>
@@ -24,13 +26,15 @@ static void print_vector(const float *v) {
 }
 int main(int argc,char **argv){
  try {
-    if(argc!=5)throw std::runtime_error("Usage: embed model mmproj runtime cpu|vulkan");
+    if(argc!=5)throw std::runtime_error("Usage: embed model mmproj runtime cpu|vulkan|metal");
     llama_log_set(concise_log,nullptr);mtmd_log_set(concise_log,nullptr);
     ggml_backend_load_all_from_path(argv[3]);llama_backend_init();
-    bool gpu=std::string(argv[4])=="vulkan";
-    ggml_backend_dev_t device=gpu?ggml_backend_dev_by_name("Vulkan0"):nullptr;
+    const std::string backend=argv[4];bool metal=backend=="metal",gpu=metal||backend=="vulkan";
+    if(!gpu && backend!="cpu")throw std::runtime_error("Backend sconosciuto: "+backend);
+    const char *gpu_name=metal?"MTL0":"Vulkan0";
+    ggml_backend_dev_t device=gpu?ggml_backend_dev_by_name(gpu_name):nullptr;
     if(gpu && (!device || !gemmadesk_gpu_type(ggml_backend_dev_type(device))))
-      throw std::runtime_error("Vulkan0 non disponibile. Seleziona CPU e riprova.");
+      throw std::runtime_error(std::string(gpu_name)+" non disponibile. Seleziona CPU e riprova.");
     ggml_backend_dev_t devices[]={device,nullptr};
     auto mp=llama_model_default_params();mp.n_gpu_layers=gpu?99:0;
     if(gpu)mp.devices=devices;
@@ -47,7 +51,7 @@ int main(int argc,char **argv){
     owned<llama_context,llama_free> ctx(llama_init_from_model(model.get(),cp),llama_free);
     if(!ctx)throw std::runtime_error("Contesto non disponibile");
     const auto *vocab=llama_model_get_vocab(model.get());int dim=llama_model_n_embd_inp(model.get());
-    std::cout<<"{\"ready\":true,\"backend\":\""<<(gpu?"Vulkan":"CPU")<<"\",\"device\":"
+    std::cout<<"{\"ready\":true,\"backend\":\""<<(metal?"Metal":gpu?"Vulkan":"CPU")<<"\",\"device\":"
       <<std::quoted(gpu?ggml_backend_dev_description(device):"CPU",'"','\\')
       <<",\"integrated_gpu\":"<<(gpu && ggml_backend_dev_type(device)==GGML_BACKEND_DEVICE_TYPE_IGPU?"true":"false")<<",\"max_text_batch\":8}"<<std::endl;
     std::string line;

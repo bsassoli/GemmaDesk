@@ -6,7 +6,7 @@ import threading
 import time
 from pathlib import Path
 from PySide6.QtCore import QLockFile
-from core import Archive,EnginePool,APP,Cancelled
+from core import Archive,EnginePool,APP,Cancelled,GPU_BACKEND
 from essay_dataset import prepare,export
 from topic_discovery import discover
 
@@ -27,7 +27,7 @@ def main():
     try:
         if not args.discover_only:
             prepare(archive)
-            engine=EnginePool(archive.data,'vulkan',2,4,text_only=True)
+            engine=EnginePool(archive.data,GPU_BACKEND,2,4,text_only=True)
             result=archive.index(engine,stop,notify);engine.close()
             if result['errors']:raise RuntimeError(f"{result['errors']} documenti in errore")
         result=discover(archive.data,stop,notify);export(archive)

@@ -17,7 +17,7 @@ import sqlite3
 import threading
 import time
 from camera_preprocess import ROOT,VERSION,clean_html,words
-from core import Archive,EnginePool,Cancelled,unit
+from core import Archive,EnginePool,Cancelled,unit,GPU_BACKEND
 
 
 def atomic_json(path,value):
@@ -129,7 +129,7 @@ def benchmark(root,output):
         text=Path(record['source']).read_text();start=min(len(text)//3,5000)
         inputs.append('title: Dibattito parlamentare | text: '+text[start:start+2200])
     rows=[];baseline=None
-    for backend,workers,batch in [('cpu',1,4),('cpu',2,4),('vulkan',1,4),('vulkan',2,4)]:
+    for backend,workers,batch in [('cpu',1,4),('cpu',2,4),(GPU_BACKEND,1,4),(GPU_BACKEND,2,4)]:
         engine=EnginePool(output/f'{backend}-{workers}',backend,workers,batch,text_only=True)
         try:
             engine.start(stop,lambda s:print(s,flush=True))
@@ -192,7 +192,7 @@ def main():
     parser.add_argument('--rebuild',action='store_true');parser.add_argument('--workers',type=int,default=min(12,os.cpu_count() or 1))
     parser.add_argument('--benchmark',action='store_true');parser.add_argument('--index',action='store_true');parser.add_argument('--export',action='store_true')
     parser.add_argument('--discover','--reclassify',dest='discover',action='store_true',help='Scopri i temi dai vettori salvati, senza categorie predefinite')
-    parser.add_argument('--backend',choices=['cpu','vulkan'],default='vulkan');args=parser.parse_args();root=args.directory.resolve()
+    parser.add_argument('--backend',choices=['cpu','vulkan','metal'],default=GPU_BACKEND);args=parser.parse_args();root=args.directory.resolve()
     # A stable lock outside swappable derived directories serializes rebuilds.
     import fcntl
     with (root/'.pipeline.lock').open('w') as guard:

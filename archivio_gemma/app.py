@@ -7,7 +7,7 @@ from PySide6.QtGui import QColor,QFont,QFontDatabase,QPainter,QPen,QBrush,QDeskt
 from PySide6.QtWidgets import (QApplication,QMainWindow,QWidget,QVBoxLayout,QHBoxLayout,QLabel,QPushButton,
     QFileDialog,QMessageBox,QLineEdit,QComboBox,QSplitter,QFrame,QTableWidget,QTableWidgetItem,
     QHeaderView,QAbstractItemView,QProgressBar,QTextBrowser,QDialog,QGraphicsView,QGraphicsScene,QGraphicsEllipseItem,QSpinBox,QListView,QListWidget,QListWidgetItem,QCheckBox,QScrollArea,QTabWidget)
-from core import Archive,EnginePool,Cancelled,APP,DEFAULT_CORPUS,SUPPORTED,check
+from core import Archive,EnginePool,Cancelled,APP,DEFAULT_CORPUS,SUPPORTED,check,GPU_BACKEND,GPU_LABEL
 from picker import DocumentPicker
 from map_style import COLORS,group_label,group_color
 STYLE='''
@@ -239,7 +239,7 @@ class Window(QMainWindow):
         self.is_camera=available(archive);self.timeline_data=None;self.timeline_window=None;self.timeline_button=None
         with archive.connect() as db:self.stable_camera=bool(db.execute("SELECT 1 FROM meta WHERE (key='camera_preprocessing' AND value='camera-thematic-v2') OR (key='thematic_preprocessing' AND value='essays-no-overlap-v1')").fetchone())
         self.history_catalog={'sessions':[]}
-        self.settings={b:dict(workers=1,batch_size=4) for b in ['cpu','vulkan']}
+        self.settings={b:dict(workers=1,batch_size=4) for b in ['cpu',GPU_BACKEND]}
         self.settings['cpu']=dict(workers=2,batch_size=2)
         try:
             saved=json.loads((archive.data/'preferenze.json').read_text())
@@ -252,7 +252,7 @@ class Window(QMainWindow):
         central=QWidget();self.setCentralWidget(central);layout=QVBoxLayout(central);layout.setContentsMargins(24,14,24,14);layout.setSpacing(9)
         self.header=QWidget();top=QHBoxLayout(self.header);top.setContentsMargins(0,0,0,0);brand=QLabel('GEMMADESK');brand.setObjectName('brand');top.addWidget(brand)
         top.addStretch()
-        self.backend=QComboBox();self.backend.addItems(['GPU Vulkan','CPU']);top.addWidget(self.backend)
+        self.backend=QComboBox();self.backend.addItems(['GPU '+GPU_LABEL,'CPU']);top.addWidget(self.backend)
         self.gpubutton=QPushButton('Verifica GPU');self.gpubutton.clicked.connect(self.verify_gpu);top.addWidget(self.gpubutton)
         helpbutton=QPushButton('Limiti e metodo');helpbutton.clicked.connect(self.help);top.addWidget(helpbutton);layout.addWidget(self.header)
         self.separator=QFrame();self.separator.setFrameShape(QFrame.Shape.HLine);layout.addWidget(self.separator)
@@ -276,7 +276,7 @@ class Window(QMainWindow):
         stats_layout.addWidget(perf);layout.addWidget(self.stats_panel)
         self.stats_toggle.toggled.connect(lambda checked:self.stats_panel.setVisible(checked and self.tabs.currentIndex()==0));self.stats_panel.hide()
         perf.setToolTip('Per TXT/MD si contano passaggi di massimo 1.024 token; i testi più brevi restano interi. Per PDF si contano le pagine. I tassi escludono il caricamento iniziale. RAM: somma dei processi del modello.')
-        self.backendlabel=QLabel('Dispositivo non ancora verificato · GPU Vulkan selezionata · nessuna elaborazione avviata')
+        self.backendlabel=QLabel('Dispositivo non ancora verificato · GPU '+GPU_LABEL+' selezionata · nessuna elaborazione avviata')
         self.backendlabel.setWordWrap(True);self.backendlabel.setObjectName('muted');layout.addWidget(self.backendlabel)
         self.status=QLabel('');self.status.setWordWrap(True);layout.addWidget(self.status)
         self.progress=QProgressBar();self.progress.setTextVisible(False);self.progress.setRange(0,100);self.progress.setValue(0);layout.addWidget(self.progress)
@@ -442,7 +442,7 @@ class Window(QMainWindow):
             self.history.show_overview(self.history_catalog,self.map.items_data,self.map_scope.currentData(),group)
         else:self.history.show_query(self.timeline_data)
     def get_engine(self):
-        backend='vulkan' if self.backend.currentIndex()==0 else 'cpu'
+        backend=GPU_BACKEND if self.backend.currentIndex()==0 else 'cpu'
         config=self.settings[backend]
         text_only=all(Path(doc['source']).suffix.lower() in {'.txt','.md'} for doc in self.archive.documents())
         if self.engine and (self.engine.backend!=backend or getattr(self.engine,'workers',1)!=config['workers'] or
@@ -454,7 +454,7 @@ class Window(QMainWindow):
         (self.archive.data/'preferenze.json').write_text(json.dumps(self.settings,indent=2))
     def performance_settings(self):
         if self.task:return
-        backend='vulkan' if self.backend.currentIndex()==0 else 'cpu';config=self.settings[backend]
+        backend=GPU_BACKEND if self.backend.currentIndex()==0 else 'cpu';config=self.settings[backend]
         dialog=QDialog(self);dialog.setWindowTitle('Velocità · '+backend.upper());dialog.resize(540,260)
         box=QVBoxLayout(dialog)
         text=QLabel('Più passaggi vengono calcolati insieme. Due worker usano due processi del modello e più memoria; il vantaggio dipende dal dispositivo.\n\nLa prova confronta 7 configurazioni su 16 passaggi reali, senza aggiungere dati alla biblioteca, e applica la più veloce misurata.');text.setWordWrap(True);box.addWidget(text)
@@ -472,7 +472,7 @@ class Window(QMainWindow):
     def benchmark(self):
         if self.task:return
         from performance import benchmark
-        backend='vulkan' if self.backend.currentIndex()==0 else 'cpu'
+        backend=GPU_BACKEND if self.backend.currentIndex()==0 else 'cpu'
         if self.engine:self.engine.close();self.engine=None
         self.status.setText('Confronto prestazioni in corso…')
         def done(result):
@@ -496,7 +496,7 @@ class Window(QMainWindow):
     def failed(self,message):
         lines=[line.strip() for line in message.splitlines() if line.strip()]
         summary=(lines[-1] if lines else 'Errore sconosciuto')[:220]
-        if self.engine and self.engine.backend=='vulkan' and not self.engine.info.get('gpu_verified'):
+        if self.engine and self.engine.backend!='cpu' and not self.engine.info.get('gpu_verified'):
             self.backendlabel.setText('GPU non verificata: '+summary)
         self.metrics['eta'].setText('—')
         self.status.setText('Elaborazione interrotta. '+summary)
@@ -527,8 +527,8 @@ class Window(QMainWindow):
             info=self.engine.info;resources=self.engine.resources()
             if info.get('ready'):
                 gpu=info.get('gpu_verified');layers=info.get('layers')
-                text=('GPU integrata verificata · ' if gpu and info.get('integrated_gpu') else 'GPU verificata · ' if gpu else 'GPU in verifica · ' if info.get('backend')=='Vulkan' else 'CPU · ')+info.get('device','')
-                if layers:text+=f" · {layers[0]}/{layers[1]} strati su Vulkan"
+                text=('GPU integrata verificata · ' if gpu and info.get('integrated_gpu') else 'GPU verificata · ' if gpu else 'GPU in verifica · ' if info.get('backend')==GPU_LABEL else 'CPU · ')+info.get('device','')
+                if layers:text+=f" · {layers[0]}/{layers[1]} strati su {GPU_LABEL}"
                 text+=' · solo testo' if info.get('text_only') else ' · testo e immagini'
                 text+=f" · {info.get('workers',1)} worker · batch {info.get('batch_size',1)}"
                 if 'gpu_device_busy_percent' in resources:text+=f" · GPU dispositivo: {resources['gpu_device_busy_percent']}%"

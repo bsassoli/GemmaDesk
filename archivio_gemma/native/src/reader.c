@@ -15,6 +15,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 extern char **environ;
+ssize_t pd_executable_path(char *path, size_t size);
 typedef struct {pid_t pid;int in,out,pages,w,h,font,failed;} Reader;
 static int io(Reader *r,void *data,size_t length,int write_data) {
     if(r->failed)return 0;
@@ -47,7 +48,7 @@ void pd_reader_close(void *p) {
     free(r);
 }
 void *pd_reader_open(const char *path,char *error,size_t size) {
-    char program[4096];ssize_t n=readlink("/proc/self/exe",program,sizeof(program)-64);
+    char program[4096];ssize_t n=pd_executable_path(program,sizeof(program)-63);
     if(n<1){snprintf(error,size,"Cannot locate bundled EPUB reader");return NULL;}program[n]=0;
     char *slash=strrchr(program,'/');if(!slash)return NULL;strcpy(slash+1,"paperdesk-reader");
     int input[2],output[2];

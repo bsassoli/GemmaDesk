@@ -1,6 +1,6 @@
 """Persistent local multimodal archive. AGPL-3.0-or-later."""
 from __future__ import annotations
-import hashlib, json, os, sqlite3, subprocess, tempfile, time
+import hashlib, json, os, sqlite3, subprocess, sys, tempfile, time
 from contextlib import contextmanager
 from pathlib import Path
 import numpy as np
@@ -14,6 +14,10 @@ SUPPORTED = {'.pdf', '.txt', '.md', '.png', '.jpg', '.jpeg', '.webp', '.tif', '.
 # Bump when preprocessing changes: never mix incompatible representations silently.
 PIPELINE = 'eg2-q8-768-smart1024-overlap96-v5'
 CONTEXT_TOKENS = 8192  # Native worker budget, shared by the inputs in a batch.
+# Pinned llama.cpp builds: Vulkan on Linux, Metal on macOS.
+GPU_BACKEND = 'metal' if sys.platform=='darwin' else 'vulkan'
+GPU_LABEL = 'Metal' if GPU_BACKEND=='metal' else 'Vulkan'
+GPU_DEVICES = {'vulkan':'Vulkan0','metal':'MTL0'}
 EXPECTED_HASHES = {'embeddinggemma-2-Q8_0.gguf':'2188ac1deca4b77dffefd603c2776a9d76d9d74ec01841392982ebb840b09135', 'mmproj-embeddinggemma-2-Q8_0.gguf':'c4a8a52691ecef40618438928bdf9e68379b854e24166f292592353db0aab64f'}
 
 class Cancelled(Exception): pass
@@ -61,7 +65,7 @@ def run(command, stop, timeout=180):
 
 class Engine:
     """Persistent native subprocess. Pipes only: no HTTP service or network socket."""
-    def __init__(self, data, backend='vulkan', port=None, batch_size=4, text_only=False, slot=0):
+    def __init__(self, data, backend=GPU_BACKEND, port=None, batch_size=4, text_only=False, slot=0):
         self.data=Path(data);self.backend=backend;self.process=None;self.log=None
         self.batch_size=batch_size;self.text_only=text_only
         self.log_path=self.data/('modello.log' if slot==0 else f'modello-{slot+1}.log')
@@ -72,6 +76,11 @@ class Engine:
     def resources(self):
         result={};p=self.process
         if not p or p.poll() is not None:return result
+        if sys.platform=='darwin':
+            # macOS has no /proc: ps reports resident memory; peak and GPU counters are unavailable.
+            try:result['ram_mib']=int(subprocess.check_output(['ps','-o','rss=','-p',str(p.pid)],text=True,timeout=2))/1024
+            except (OSError,ValueError,subprocess.SubprocessError):pass
+            return result
         try:
             fields=dict(line.split(':',1) for line in Path(f'/proc/{p.pid}/status').read_text().splitlines() if ':' in line)
             result['ram_mib']=int(fields['VmRSS'].split()[0])/1024
@@ -88,7 +97,7 @@ class Engine:
                     result[out]=sum(int(f.get(key,'0').split()[0]) for f in clients.values())/1024
                 result['gpu_compute_ns']=sum(int(value.split()[0]) for f in clients.values() for key,value in f.items() if key.startswith('drm-engine-'))
         except (OSError,ValueError):pass
-        if self.backend=='vulkan':
+        if self.backend!='cpu':
             for path in Path('/sys/class/drm').glob('card*/device/gpu_busy_percent'):
                 try:result['gpu_device_busy_percent']=int(path.read_text());break
                 except (OSError,ValueError):pass
@@ -122,7 +131,7 @@ class Engine:
             if not self.info.get('ready'):raise RuntimeError('Il modello non è pronto.')
             self.info.update(text_only=self.text_only,batch_size=self.batch_size,workers=1)
             self.info['gpu_verified']=False
-            if self.backend=='vulkan':
+            if self.backend!='cpu':
                 notify('Verifica GPU: inferenza reale '+('di testo…' if self.text_only else 'di testo e immagine…'))
                 saved_stats=dict(self.stats)
                 before=self.resources().get('gpu_compute_ns')
@@ -135,9 +144,9 @@ class Engine:
                 import re
                 offload=re.findall(r'offloaded (\d+)/(\d+) layers to GPU',log)
                 self.info['layers']=offload[-1] if offload else None
-                self.info['vision_gpu']='CLIP using Vulkan0 backend' in log
+                device=GPU_DEVICES[self.backend];self.info['vision_gpu']=f'CLIP using {device} backend' in log
                 if not offload or offload[-1][0]!=offload[-1][1] or (not self.text_only and not self.info['vision_gpu']):
-                    raise RuntimeError('Il log non conferma il caricamento completo di testo e visione su Vulkan0.')
+                    raise RuntimeError(f'Il log non conferma il caricamento completo di testo e visione su {device}.')
                 self.info['gpu_compute_delta_ns']=None if before is None or after is None else after-before
                 if before is not None and after is not None and after<=before:
                     raise RuntimeError('GPU richiesta, ma il contatore di calcolo non è aumentato durante il test.')
@@ -239,7 +248,7 @@ class EnginePool:
     Tokenization runs between batches on the primary worker. No pipe or context
     is ever shared by concurrent calls. Archive writes stay on the caller thread.
     """
-    def __init__(self,data,backend='vulkan',workers=1,batch_size=4,text_only=False):
+    def __init__(self,data,backend=GPU_BACKEND,workers=1,batch_size=4,text_only=False):
         from concurrent.futures import ThreadPoolExecutor
         if workers not in (1,2) or batch_size not in (1,2,4,8):raise ValueError('Configurazione worker non valida.')
         self.data=Path(data);self.backend=backend;self.workers=workers;self.per_worker_batch=batch_size

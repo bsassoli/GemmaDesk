@@ -673,7 +673,7 @@ static void write_native_details(Writer *w) {
     }
 }
 static void native_font(Writer *w) {
-    fz_context *ctx=w->doc->ctx;char path[4096];ssize_t n=readlink("/proc/self/exe",path,sizeof(path)-1);
+    fz_context *ctx=w->doc->ctx;char path[4096];ssize_t n=pd_executable_path(path,sizeof(path));
     if(n<1)fz_throw(ctx,FZ_ERROR_SYSTEM,"Cannot locate bundled math font");
     path[n]=0;char *end=strrchr(path,'/');if(!end)fz_throw(ctx,FZ_ERROR_SYSTEM,"Cannot locate reader assets");*end=0;
     char base[4096];snprintf(base,sizeof(base),"%s",path);

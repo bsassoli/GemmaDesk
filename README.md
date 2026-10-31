@@ -1,6 +1,6 @@
 # GemmaDesk
 
-Local semantic search with [EmbeddingGemma 2](https://huggingface.co/ggml-org/embeddinggemma-2-GGUF), running on CPU or Vulkan GPU.
+Local semantic search with [EmbeddingGemma 2](https://huggingface.co/ggml-org/embeddinggemma-2-GGUF), running on CPU or GPU: Vulkan on Linux, Metal on macOS.
 
 This repository accompanies my YouTube video on EmbeddingGemma 2.
 
@@ -15,16 +15,32 @@ This repository accompanies my YouTube video on EmbeddingGemma 2.
 
 ## Run
 
-Linux x86_64 · Debian 13 · Python 3.11+
+Setup needs [uv](https://docs.astral.sh/uv/getting-started/installation/), which creates a Python 3.13 environment in `.venv`.
+
+### macOS (Apple Silicon)
 
 ```bash
-git clone https://github.com/GarauGarau/GemmaDesk.git
+brew install uv mupdf ffmpeg
+git clone https://github.com/bsassoli/GemmaDesk.git
 cd GemmaDesk
-sudo apt install python3-venv python3-dev build-essential pkg-config \
+./scripts/setup.sh
+./Avvia-GemmaDesk.sh
+./Avvia-GemmaVideo.sh
+```
+
+You also need the Xcode Command Line Tools (`xcode-select --install`). Optional: `brew install --cask font-dejavu` for the intended interface font; without it, the apps use the system font.
+
+Both apps use Metal by default on macOS. To use the CPU, choose it in the app's device menu. Intel Macs are not supported.
+
+### Linux x86_64 (Debian 13)
+
+```bash
+git clone https://github.com/bsassoli/GemmaDesk.git
+cd GemmaDesk
+sudo apt install build-essential pkg-config \
   libmupdf-dev zlib1g-dev ffmpeg libvulkan1 mesa-vulkan-drivers \
   libxcb-cursor0 libegl1 libxkbcommon-x11-0
 ./scripts/setup.sh
-source .venv/bin/activate
 ./Avvia-GemmaDesk.sh
 ./Avvia-GemmaVideo.sh
 ```
@@ -35,6 +51,7 @@ Add files, index them, then search.
 ## Examples
 
 ```bash
+source .venv/bin/activate
 python scripts/documents.py index --source examples/documents --data data/demo
 python scripts/documents.py search --data data/demo --query "Store solar energy for the night"
 ./Avvia-GemmaDesk.sh --data data/demo --corpus examples/documents --collection "My documents"
@@ -43,9 +60,27 @@ python examples/make_video.py
 ./Avvia-GemmaVideo.sh --source examples/generated
 ```
 
-Replace `examples/documents` with your own folder of TXT, Markdown, PDF, DOCX or images. Add `--backend vulkan` for GPU indexing. Optional `filename.txt.json` metadata: `{"title":"My text","date":"2024-06-12"}`.
+Replace `examples/documents` with your own folder of TXT, Markdown, PDF, DOCX or images. Add `--backend metal` (macOS) or `--backend vulkan` (Linux) for GPU indexing. Optional `filename.txt.json` metadata: `{"title":"My text","date":"2024-06-12"}`.
 
 ## Benchmarks
+
+### Apple M4
+
+Apple M4 · 24 GB · Q8_0 · 8 CPU threads. Warm medians: 10 runs. Model loading excluded.
+
+| Task | CPU | Metal |
+|---|---:|---:|
+| Embed 1,024 tokens | 641 ms | **276 ms** |
+| Embed 4,096 tokens | 4.23 s | **1.73 s** |
+| Embed 20 s of audio | 1.46 s | **318 ms** |
+| Embed a 672 × 420 frame | 1.38 s | **263 ms** |
+| Index 64 s of video | 25.31 s | **5.95 s** |
+| Search text vectors | 35.9 ms | **19.4 ms** |
+| Search audio/frame vectors | 15.8 ms | **11.1 ms** |
+
+**3,706 tokens/s** at 1,024 tokens; video indexing **10.8× real time**. [Measurements](bench/results/apple-m4.json).
+
+### AMD Ryzen AI 9
 
 AMD Ryzen AI 9 HX PRO 370 · Radeon 890M · Q8_0 · 8 CPU threads. Warm medians: 10 runs; search: 5 queries × 5 runs. Model loading excluded.
 
@@ -64,3 +99,5 @@ AMD Ryzen AI 9 HX PRO 370 · Radeon 890M · Q8_0 · 8 CPU threads. Warm medians:
 ```bash
 python bench/run.py --backend both --repeats 10
 ```
+
+`both` compares the CPU with the GPU backend for your platform.

@@ -1,0 +1,2127 @@
+{
+  "environment": {
+    "cpu": "Apple M4",
+    "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.1",
+    "numpy": "2.3.5",
+    "llama_threads": 8,
+    "blas_threads": 4,
+    "text_workers": 1,
+    "text_batch": 1
+  },
+  "protocol": {
+    "repeats": 10,
+    "warmup": true,
+    "model_load_included": false,
+    "indexing_import_included": false,
+    "retrieval_includes_query_embedding": true,
+    "video_step_seconds": 4,
+    "input_kind": "synthetic",
+    "text_sha256": "07cfc3399801aa94fe7d558b91dc3c34be5c9c8b8aa7f696ee70e2f8d56840d9",
+    "video_duration_seconds": 64.0,
+    "frame_pixels": [
+      672,
+      420
+    ],
+    "video_sha256": "e9b09bf4f1e19670e2b995210f9f3b840af40230fa2b6cc7716eae72356b84fc"
+  },
+  "measurements": [
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 256,
+      "repetition": 0,
+      "seconds": 0.12157979211769998,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 256,
+      "repetition": 1,
+      "seconds": 0.12079958315007389,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 256,
+      "repetition": 2,
+      "seconds": 0.20063745812512934,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 256,
+      "repetition": 3,
+      "seconds": 0.18948683398775756,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 256,
+      "repetition": 4,
+      "seconds": 0.12690929207019508,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 256,
+      "repetition": 5,
+      "seconds": 0.12026662495918572,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 256,
+      "repetition": 6,
+      "seconds": 0.12807470792904496,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 256,
+      "repetition": 7,
+      "seconds": 0.12146316701546311,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 256,
+      "repetition": 8,
+      "seconds": 0.1306182499974966,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 256,
+      "repetition": 9,
+      "seconds": 0.138563415966928,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 1024,
+      "repetition": 0,
+      "seconds": 0.6484809159301221,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 1024,
+      "repetition": 1,
+      "seconds": 0.6309344170149416,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 1024,
+      "repetition": 2,
+      "seconds": 0.652188542066142,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 1024,
+      "repetition": 3,
+      "seconds": 0.6270510409958661,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 1024,
+      "repetition": 4,
+      "seconds": 0.6203212500549853,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 1024,
+      "repetition": 5,
+      "seconds": 0.6421482497826219,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 1024,
+      "repetition": 6,
+      "seconds": 0.6804748750291765,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 1024,
+      "repetition": 7,
+      "seconds": 0.6395395421423018,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 1024,
+      "repetition": 8,
+      "seconds": 0.6421983749605715,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 1024,
+      "repetition": 9,
+      "seconds": 0.6365379160270095,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 0,
+      "seconds": 4.168422041926533,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 1,
+      "seconds": 3.954489374998957,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 2,
+      "seconds": 4.019675875082612,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 3,
+      "seconds": 4.161543000023812,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 4,
+      "seconds": 4.203828249825165,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 5,
+      "seconds": 4.303537333151326,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 6,
+      "seconds": 4.496711374958977,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 7,
+      "seconds": 4.2484759169165045,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 8,
+      "seconds": 4.293216333957389,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 9,
+      "seconds": 4.339512625010684,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 8000,
+      "repetition": 0,
+      "seconds": 12.01642429200001,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 8000,
+      "repetition": 1,
+      "seconds": 12.027043082984164,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 8000,
+      "repetition": 2,
+      "seconds": 12.06962529104203,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 8000,
+      "repetition": 3,
+      "seconds": 11.957271083956584,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 8000,
+      "repetition": 4,
+      "seconds": 13.091659458121285,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 8000,
+      "repetition": 5,
+      "seconds": 12.314391333144158,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 8000,
+      "repetition": 6,
+      "seconds": 13.61913154204376,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 8000,
+      "repetition": 7,
+      "seconds": 13.432009333046153,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 8000,
+      "repetition": 8,
+      "seconds": 12.430256457999349,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "cpu",
+      "size": 8000,
+      "repetition": 9,
+      "seconds": 12.601560750044882,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 0,
+      "seconds": 3.059453791938722
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 1,
+      "seconds": 3.0409080828540027
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 2,
+      "seconds": 3.173939124913886
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 3,
+      "seconds": 3.769398167030886
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 4,
+      "seconds": 3.242709750076756
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 5,
+      "seconds": 3.8079470419324934
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 6,
+      "seconds": 4.3403533331584185
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 7,
+      "seconds": 3.2617596660275012
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 8,
+      "seconds": 3.424213540973142
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "cpu",
+      "size": 4096,
+      "repetition": 9,
+      "seconds": 3.5184958330355585
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "text",
+      "repetition": 0,
+      "seconds": 0.023896832950413227
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "text",
+      "repetition": 1,
+      "seconds": 0.039142875000834465
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "text",
+      "repetition": 2,
+      "seconds": 0.03663633391261101
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "text",
+      "repetition": 3,
+      "seconds": 0.06677754106931388
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "text",
+      "repetition": 4,
+      "seconds": 0.04354879097081721
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "text",
+      "repetition": 5,
+      "seconds": 0.041273208102211356
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "text",
+      "repetition": 6,
+      "seconds": 0.035171540919691324
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "text",
+      "repetition": 7,
+      "seconds": 0.02683258312754333
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "text",
+      "repetition": 8,
+      "seconds": 0.02324512484483421
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "text",
+      "repetition": 9,
+      "seconds": 0.02090012514963746
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 4,
+      "repetition": 0,
+      "seconds": 0.23851141706109047
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 4,
+      "repetition": 1,
+      "seconds": 0.21739437500946224
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 4,
+      "repetition": 2,
+      "seconds": 0.21843812498264015
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 4,
+      "repetition": 3,
+      "seconds": 0.22054816596210003
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 4,
+      "repetition": 4,
+      "seconds": 0.21775791700929403
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 4,
+      "repetition": 5,
+      "seconds": 0.7235498751979321
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 4,
+      "repetition": 6,
+      "seconds": 0.2267487500794232
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 4,
+      "repetition": 7,
+      "seconds": 0.2253636249806732
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 4,
+      "repetition": 8,
+      "seconds": 0.23043500003404915
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 4,
+      "repetition": 9,
+      "seconds": 0.24397612502798438
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 10,
+      "repetition": 0,
+      "seconds": 0.9572042501531541
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 10,
+      "repetition": 1,
+      "seconds": 0.8665431251283735
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 10,
+      "repetition": 2,
+      "seconds": 0.9707198748365045
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 10,
+      "repetition": 3,
+      "seconds": 1.2498693750239909
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 10,
+      "repetition": 4,
+      "seconds": 0.9924747918266803
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 10,
+      "repetition": 5,
+      "seconds": 0.6643038750626147
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 10,
+      "repetition": 6,
+      "seconds": 0.550794499926269
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 10,
+      "repetition": 7,
+      "seconds": 0.6421352499164641
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 10,
+      "repetition": 8,
+      "seconds": 0.8098804170731455
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 10,
+      "repetition": 9,
+      "seconds": 0.5887381660286337
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 20,
+      "repetition": 0,
+      "seconds": 1.3013309158850461
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 20,
+      "repetition": 1,
+      "seconds": 1.20682766684331
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 20,
+      "repetition": 2,
+      "seconds": 1.6126789581030607
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 20,
+      "repetition": 3,
+      "seconds": 1.173145999899134
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 20,
+      "repetition": 4,
+      "seconds": 2.5765254590660334
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 20,
+      "repetition": 5,
+      "seconds": 2.493930541910231
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 20,
+      "repetition": 6,
+      "seconds": 1.9105553750414401
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 20,
+      "repetition": 7,
+      "seconds": 2.2771636249963194
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 20,
+      "repetition": 8,
+      "seconds": 1.1416345001198351
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "cpu",
+      "size": 20,
+      "repetition": 9,
+      "seconds": 1.130000458098948
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "cpu",
+      "size": 672,
+      "repetition": 0,
+      "seconds": 1.3831179160624743
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "cpu",
+      "size": 672,
+      "repetition": 1,
+      "seconds": 2.0154947908595204
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "cpu",
+      "size": 672,
+      "repetition": 2,
+      "seconds": 1.2960765408352017
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "cpu",
+      "size": 672,
+      "repetition": 3,
+      "seconds": 1.4490367921534926
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "cpu",
+      "size": 672,
+      "repetition": 4,
+      "seconds": 1.2187497918494046
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "cpu",
+      "size": 672,
+      "repetition": 5,
+      "seconds": 1.206092458916828
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "cpu",
+      "size": 672,
+      "repetition": 6,
+      "seconds": 1.4727048750501126
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "cpu",
+      "size": 672,
+      "repetition": 7,
+      "seconds": 1.4556450000964105
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "cpu",
+      "size": 672,
+      "repetition": 8,
+      "seconds": 1.3239280839916319
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "cpu",
+      "size": 672,
+      "repetition": 9,
+      "seconds": 1.3759855420794338
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "cpu",
+      "size": 64.0,
+      "repetition": 0,
+      "seconds": 26.480630500009283
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "cpu",
+      "size": 64.0,
+      "repetition": 1,
+      "seconds": 26.18450270802714
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "cpu",
+      "size": 64.0,
+      "repetition": 2,
+      "seconds": 26.31980104208924
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "cpu",
+      "size": 64.0,
+      "repetition": 3,
+      "seconds": 23.487174957990646
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "cpu",
+      "size": 64.0,
+      "repetition": 4,
+      "seconds": 28.96335079194978
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "cpu",
+      "size": 64.0,
+      "repetition": 5,
+      "seconds": 24.806051125051454
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "cpu",
+      "size": 64.0,
+      "repetition": 6,
+      "seconds": 24.092529375106096
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "cpu",
+      "size": 64.0,
+      "repetition": 7,
+      "seconds": 25.805622667074203
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "cpu",
+      "size": 64.0,
+      "repetition": 8,
+      "seconds": 24.358008375158533
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "cpu",
+      "size": 64.0,
+      "repetition": 9,
+      "seconds": 24.170400749891996
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "audio",
+      "repetition": 0,
+      "seconds": 0.019617290934547782
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "audio",
+      "repetition": 1,
+      "seconds": 0.021002958994358778
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "audio",
+      "repetition": 2,
+      "seconds": 0.017577374819666147
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "audio",
+      "repetition": 3,
+      "seconds": 0.021866749972105026
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "audio",
+      "repetition": 4,
+      "seconds": 0.025905666872859
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "audio",
+      "repetition": 5,
+      "seconds": 0.019381833961233497
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "audio",
+      "repetition": 6,
+      "seconds": 0.016569624887779355
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "audio",
+      "repetition": 7,
+      "seconds": 0.016382165951654315
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "audio",
+      "repetition": 8,
+      "seconds": 0.015635584015399218
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "audio",
+      "repetition": 9,
+      "seconds": 0.015007333131507039
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "frame",
+      "repetition": 0,
+      "seconds": 0.014597833156585693
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "frame",
+      "repetition": 1,
+      "seconds": 0.015173083869740367
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "frame",
+      "repetition": 2,
+      "seconds": 0.015463792020455003
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "frame",
+      "repetition": 3,
+      "seconds": 0.015731167048215866
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "frame",
+      "repetition": 4,
+      "seconds": 0.01550783310085535
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "frame",
+      "repetition": 5,
+      "seconds": 0.015445875003933907
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "frame",
+      "repetition": 6,
+      "seconds": 0.014695582911372185
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "frame",
+      "repetition": 7,
+      "seconds": 0.015533833066001534
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "frame",
+      "repetition": 8,
+      "seconds": 0.016313917003571987
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "frame",
+      "repetition": 9,
+      "seconds": 0.01479120901785791
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "both",
+      "repetition": 0,
+      "seconds": 0.015001249965280294
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "both",
+      "repetition": 1,
+      "seconds": 0.014792083064094186
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "both",
+      "repetition": 2,
+      "seconds": 0.015846709022298455
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "both",
+      "repetition": 3,
+      "seconds": 0.015739833936095238
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "both",
+      "repetition": 4,
+      "seconds": 0.016732250107452273
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "both",
+      "repetition": 5,
+      "seconds": 0.017668875167146325
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "both",
+      "repetition": 6,
+      "seconds": 0.019684124970808625
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "both",
+      "repetition": 7,
+      "seconds": 0.016435292083770037
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "both",
+      "repetition": 8,
+      "seconds": 0.014817208983004093
+    },
+    {
+      "metric": "retrieval",
+      "backend": "cpu",
+      "size": "both",
+      "repetition": 9,
+      "seconds": 0.015609957976266742
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 256,
+      "repetition": 0,
+      "seconds": 0.05235958285629749,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 256,
+      "repetition": 1,
+      "seconds": 0.05367258284240961,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 256,
+      "repetition": 2,
+      "seconds": 0.05249500018544495,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 256,
+      "repetition": 3,
+      "seconds": 0.054235750110819936,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 256,
+      "repetition": 4,
+      "seconds": 0.05014254106208682,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 256,
+      "repetition": 5,
+      "seconds": 0.05272758402861655,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 256,
+      "repetition": 6,
+      "seconds": 0.05268983403220773,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 256,
+      "repetition": 7,
+      "seconds": 0.05483450018800795,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 256,
+      "repetition": 8,
+      "seconds": 0.05732275010086596,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 256,
+      "repetition": 9,
+      "seconds": 0.057362041901797056,
+      "tokens": 256
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 1024,
+      "repetition": 0,
+      "seconds": 0.28259816695936024,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 1024,
+      "repetition": 1,
+      "seconds": 0.2654358330182731,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 1024,
+      "repetition": 2,
+      "seconds": 0.27390616689808667,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 1024,
+      "repetition": 3,
+      "seconds": 0.2707549170590937,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 1024,
+      "repetition": 4,
+      "seconds": 0.27611279184930027,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 1024,
+      "repetition": 5,
+      "seconds": 0.2805323749780655,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 1024,
+      "repetition": 6,
+      "seconds": 0.27731687505729496,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 1024,
+      "repetition": 7,
+      "seconds": 0.2765204170718789,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 1024,
+      "repetition": 8,
+      "seconds": 0.27570245787501335,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 1024,
+      "repetition": 9,
+      "seconds": 0.27682404196821153,
+      "tokens": 1024
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 0,
+      "seconds": 1.5922454581595957,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 1,
+      "seconds": 1.646124041872099,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 2,
+      "seconds": 1.7311613748315722,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 3,
+      "seconds": 1.7698610839433968,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 4,
+      "seconds": 1.7364593748934567,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 5,
+      "seconds": 1.6190271661616862,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 6,
+      "seconds": 1.8192032082006335,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 7,
+      "seconds": 1.7076646669302136,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 8,
+      "seconds": 1.8110145421233028,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 9,
+      "seconds": 1.7345977909862995,
+      "tokens": 4096
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 8000,
+      "repetition": 0,
+      "seconds": 3.989362125052139,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 8000,
+      "repetition": 1,
+      "seconds": 3.6537122500594705,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 8000,
+      "repetition": 2,
+      "seconds": 3.9015397920738906,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 8000,
+      "repetition": 3,
+      "seconds": 3.768735291901976,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 8000,
+      "repetition": 4,
+      "seconds": 3.6858152500353754,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 8000,
+      "repetition": 5,
+      "seconds": 3.2335552079603076,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 8000,
+      "repetition": 6,
+      "seconds": 3.2708433750085533,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 8000,
+      "repetition": 7,
+      "seconds": 3.319438375066966,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 8000,
+      "repetition": 8,
+      "seconds": 3.2787949168123305,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_embedding",
+      "backend": "metal",
+      "size": 8000,
+      "repetition": 9,
+      "seconds": 3.2808298747986555,
+      "tokens": 8000
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 0,
+      "seconds": 0.9447432500310242
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 1,
+      "seconds": 0.9494604580104351
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 2,
+      "seconds": 0.9478959159459919
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 3,
+      "seconds": 0.9559928749222308
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 4,
+      "seconds": 0.969604125013575
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 5,
+      "seconds": 0.9535748341586441
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 6,
+      "seconds": 0.9526895000599325
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 7,
+      "seconds": 0.9571202921215445
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 8,
+      "seconds": 0.9557693339884281
+    },
+    {
+      "metric": "text_indexing",
+      "backend": "metal",
+      "size": 4096,
+      "repetition": 9,
+      "seconds": 0.9591350830160081
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "text",
+      "repetition": 0,
+      "seconds": 0.01566979195922613
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "text",
+      "repetition": 1,
+      "seconds": 0.015107416082173586
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "text",
+      "repetition": 2,
+      "seconds": 0.015323499916121364
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "text",
+      "repetition": 3,
+      "seconds": 0.016167499823495746
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "text",
+      "repetition": 4,
+      "seconds": 0.018359458073973656
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "text",
+      "repetition": 5,
+      "seconds": 0.02135520800948143
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "text",
+      "repetition": 6,
+      "seconds": 0.02091466705314815
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "text",
+      "repetition": 7,
+      "seconds": 0.02134454110637307
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "text",
+      "repetition": 8,
+      "seconds": 0.02044224995188415
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "text",
+      "repetition": 9,
+      "seconds": 0.02267808304168284
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 4,
+      "repetition": 0,
+      "seconds": 0.07664295914582908
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 4,
+      "repetition": 1,
+      "seconds": 0.0769897080026567
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 4,
+      "repetition": 2,
+      "seconds": 0.07741308398544788
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 4,
+      "repetition": 3,
+      "seconds": 0.07814829191192985
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 4,
+      "repetition": 4,
+      "seconds": 0.07688816706649959
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 4,
+      "repetition": 5,
+      "seconds": 0.07917333417572081
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 4,
+      "repetition": 6,
+      "seconds": 0.08318554214201868
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 4,
+      "repetition": 7,
+      "seconds": 0.07743979105725884
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 4,
+      "repetition": 8,
+      "seconds": 0.07724354090169072
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 4,
+      "repetition": 9,
+      "seconds": 0.0775530410464853
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 10,
+      "repetition": 0,
+      "seconds": 0.15672662504948676
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 10,
+      "repetition": 1,
+      "seconds": 0.186189082916826
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 10,
+      "repetition": 2,
+      "seconds": 0.17641604179516435
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 10,
+      "repetition": 3,
+      "seconds": 0.18177691707387567
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 10,
+      "repetition": 4,
+      "seconds": 0.16874587489292026
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 10,
+      "repetition": 5,
+      "seconds": 0.1544425419997424
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 10,
+      "repetition": 6,
+      "seconds": 0.1533186670858413
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 10,
+      "repetition": 7,
+      "seconds": 0.15544412494637072
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 10,
+      "repetition": 8,
+      "seconds": 0.1543992089573294
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 10,
+      "repetition": 9,
+      "seconds": 0.15715241618454456
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 20,
+      "repetition": 0,
+      "seconds": 0.31663112505339086
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 20,
+      "repetition": 1,
+      "seconds": 0.31356145814061165
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 20,
+      "repetition": 2,
+      "seconds": 0.3183313747867942
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 20,
+      "repetition": 3,
+      "seconds": 0.3159274999052286
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 20,
+      "repetition": 4,
+      "seconds": 0.31632266589440405
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 20,
+      "repetition": 5,
+      "seconds": 0.3131555418949574
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 20,
+      "repetition": 6,
+      "seconds": 0.3204287919215858
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 20,
+      "repetition": 7,
+      "seconds": 0.3261139579117298
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 20,
+      "repetition": 8,
+      "seconds": 0.3300377500709146
+    },
+    {
+      "metric": "audio_embedding",
+      "backend": "metal",
+      "size": 20,
+      "repetition": 9,
+      "seconds": 0.32309875008650124
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "metal",
+      "size": 672,
+      "repetition": 0,
+      "seconds": 0.2738402499817312
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "metal",
+      "size": 672,
+      "repetition": 1,
+      "seconds": 0.26337512489408255
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "metal",
+      "size": 672,
+      "repetition": 2,
+      "seconds": 0.26563358400017023
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "metal",
+      "size": 672,
+      "repetition": 3,
+      "seconds": 0.2619433330837637
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "metal",
+      "size": 672,
+      "repetition": 4,
+      "seconds": 0.26170966611243784
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "metal",
+      "size": 672,
+      "repetition": 5,
+      "seconds": 0.2655386249534786
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "metal",
+      "size": 672,
+      "repetition": 6,
+      "seconds": 0.2630525000859052
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "metal",
+      "size": 672,
+      "repetition": 7,
+      "seconds": 0.2628240829799324
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "metal",
+      "size": 672,
+      "repetition": 8,
+      "seconds": 0.26392162521369755
+    },
+    {
+      "metric": "frame_embedding",
+      "backend": "metal",
+      "size": 672,
+      "repetition": 9,
+      "seconds": 0.26123199984431267
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "metal",
+      "size": 64.0,
+      "repetition": 0,
+      "seconds": 5.949384874897078
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "metal",
+      "size": 64.0,
+      "repetition": 1,
+      "seconds": 5.859161332948133
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "metal",
+      "size": 64.0,
+      "repetition": 2,
+      "seconds": 5.9399622089695185
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "metal",
+      "size": 64.0,
+      "repetition": 3,
+      "seconds": 5.995088292052969
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "metal",
+      "size": 64.0,
+      "repetition": 4,
+      "seconds": 5.909378458047286
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "metal",
+      "size": 64.0,
+      "repetition": 5,
+      "seconds": 5.9220003329683095
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "metal",
+      "size": 64.0,
+      "repetition": 6,
+      "seconds": 5.959029583027586
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "metal",
+      "size": 64.0,
+      "repetition": 7,
+      "seconds": 5.9591664171312
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "metal",
+      "size": 64.0,
+      "repetition": 8,
+      "seconds": 5.960735916858539
+    },
+    {
+      "metric": "video_indexing",
+      "backend": "metal",
+      "size": 64.0,
+      "repetition": 9,
+      "seconds": 5.956544707994908
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "audio",
+      "repetition": 0,
+      "seconds": 0.010196666931733489
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "audio",
+      "repetition": 1,
+      "seconds": 0.010244749952107668
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "audio",
+      "repetition": 2,
+      "seconds": 0.0105124581605196
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "audio",
+      "repetition": 3,
+      "seconds": 0.010225042002275586
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "audio",
+      "repetition": 4,
+      "seconds": 0.011113625019788742
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "audio",
+      "repetition": 5,
+      "seconds": 0.01104400004260242
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "audio",
+      "repetition": 6,
+      "seconds": 0.010101125109940767
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "audio",
+      "repetition": 7,
+      "seconds": 0.01099708303809166
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "audio",
+      "repetition": 8,
+      "seconds": 0.00998570816591382
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "audio",
+      "repetition": 9,
+      "seconds": 0.009847833076491952
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "frame",
+      "repetition": 0,
+      "seconds": 0.010089249815791845
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "frame",
+      "repetition": 1,
+      "seconds": 0.011190999997779727
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "frame",
+      "repetition": 2,
+      "seconds": 0.01111187506467104
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "frame",
+      "repetition": 3,
+      "seconds": 0.010125250089913607
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "frame",
+      "repetition": 4,
+      "seconds": 0.010284791933372617
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "frame",
+      "repetition": 5,
+      "seconds": 0.01114149997010827
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "frame",
+      "repetition": 6,
+      "seconds": 0.010354541940614581
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "frame",
+      "repetition": 7,
+      "seconds": 0.010297082830220461
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "frame",
+      "repetition": 8,
+      "seconds": 0.010157667100429535
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "frame",
+      "repetition": 9,
+      "seconds": 0.009929707972332835
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "both",
+      "repetition": 0,
+      "seconds": 0.010256666922941804
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "both",
+      "repetition": 1,
+      "seconds": 0.011140999849885702
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "both",
+      "repetition": 2,
+      "seconds": 0.01085270894691348
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "both",
+      "repetition": 3,
+      "seconds": 0.010180915938690305
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "both",
+      "repetition": 4,
+      "seconds": 0.011218917090445757
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "both",
+      "repetition": 5,
+      "seconds": 0.011469457997009158
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "both",
+      "repetition": 6,
+      "seconds": 0.010630459059029818
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "both",
+      "repetition": 7,
+      "seconds": 0.011596207972615957
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "both",
+      "repetition": 8,
+      "seconds": 0.011796541046351194
+    },
+    {
+      "metric": "retrieval",
+      "backend": "metal",
+      "size": "both",
+      "repetition": 9,
+      "seconds": 0.011110416846349835
+    }
+  ],
+  "status": "complete",
+  "engines": [
+    {
+      "program": "GemmaDesk",
+      "ready": true,
+      "backend": "CPU",
+      "device": "CPU",
+      "integrated_gpu": false,
+      "max_text_batch": 8,
+      "text_only": true,
+      "batch_size": 1,
+      "workers": 1,
+      "gpu_verified": false
+    },
+    {
+      "program": "GemmaVideo",
+      "ready": true,
+      "backend": "CPU",
+      "device": "CPU",
+      "integrated_gpu": false,
+      "max_text_batch": 4
+    },
+    {
+      "program": "GemmaDesk",
+      "ready": true,
+      "backend": "Metal",
+      "device": "Apple M4",
+      "integrated_gpu": false,
+      "max_text_batch": 8,
+      "text_only": true,
+      "batch_size": 1,
+      "workers": 1,
+      "gpu_verified": true,
+      "layers": [
+        "25",
+        "25"
+      ],
+      "vision_gpu": false,
+      "gpu_compute_delta_ns": null
+    },
+    {
+      "program": "GemmaVideo",
+      "ready": true,
+      "backend": "Metal",
+      "device": "Apple M4",
+      "integrated_gpu": false,
+      "max_text_batch": 4
+    }
+  ],
+  "corpora": {
+    "text": {
+      "documents": 1
+    },
+    "video": {
+      "videos": 1
+    }
+  }
+}

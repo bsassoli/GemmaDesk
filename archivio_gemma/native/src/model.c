@@ -14,6 +14,11 @@
 #include <sys/wait.h>
 #include <time.h>
 #include <unistd.h>
+#ifdef MSG_NOSIGNAL
+#define SEND_FLAGS MSG_NOSIGNAL
+#else
+#define SEND_FLAGS 0
+#endif
 
 extern char **environ;
 struct PD_ModelProcess {pid_t pid;int fd,page;double deadline,started;char stage[112],cache[3900],signature[65],backend[160];};
@@ -33,7 +38,7 @@ static int transfer(Document *d,void *data,size_t n,int sending) {
         if(ready<0 && errno==EINTR)continue;
         if(ready<0 || (ready && (fd.revents&(POLLERR|POLLNVAL))))return 0;
         if(!ready)continue;
-        ssize_t count=sending?send(m->fd,p,n,MSG_NOSIGNAL|MSG_DONTWAIT):recv(m->fd,p,n,MSG_DONTWAIT);
+        ssize_t count=sending?send(m->fd,p,n,SEND_FLAGS|MSG_DONTWAIT):recv(m->fd,p,n,MSG_DONTWAIT);
         if(count<0 && (errno==EAGAIN || errno==EINTR))continue;
         if(count<=0)return 0;
         p+=count;n-=(size_t)count;
@@ -78,7 +83,7 @@ void pd_model_start(Document *d) {
         return;
     }
     char root[4000],worker[4096],weights[4096],projector[4096];
-    ssize_t size=readlink("/proc/self/exe",root,sizeof(root)-1);
+        ssize_t size=pd_executable_path(root,sizeof(root));
     if(size<1){failed(d,"Cannot locate bundled engine");return;}root[size]=0;
     char *slash=strrchr(root,'/');if(!slash){failed(d,"Cannot locate application directory");return;}*slash=0;
     if(snprintf(worker,sizeof(worker),"%s/paperdesk-model",root)>=(int)sizeof(worker))return;
@@ -98,7 +103,11 @@ void pd_model_start(Document *d) {
     }
     d->model=fz_calloc(d->ctx,1,sizeof(PD_ModelProcess));d->model->fd=-1;d->model->page=-1;
     int sockets[2];
-    if(socketpair(AF_UNIX,SOCK_STREAM|SOCK_CLOEXEC,0,sockets)) {failed(d,"Cannot open model channel");pd_model_close(d);return;}
+    if(socketpair(AF_UNIX,SOCK_STREAM,0,sockets)) {failed(d,"Cannot open model channel");pd_model_close(d);return;}
+    fcntl(sockets[0],F_SETFD,FD_CLOEXEC);fcntl(sockets[1],F_SETFD,FD_CLOEXEC);
+#ifdef SO_NOSIGPIPE
+    setsockopt(sockets[0],SOL_SOCKET,SO_NOSIGPIPE,&(int){1},sizeof(int));
+#endif
     posix_spawn_file_actions_t actions;posix_spawn_file_actions_init(&actions);
     posix_spawn_file_actions_adddup2(&actions,sockets[1],STDIN_FILENO);
     posix_spawn_file_actions_adddup2(&actions,sockets[1],STDOUT_FILENO);

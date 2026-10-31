@@ -89,6 +89,7 @@ float rect_area(PD_Rect a);
 float rect_x_overlap(PD_Rect a, PD_Rect b);
 PD_Rect from_fz(fz_rect r);
 fz_rect to_fz(PD_Rect r);
+ssize_t pd_executable_path(char *path, size_t size);
 void *pd_grow(fz_context *ctx, void *ptr, int *cap, int need, size_t item);
 void pd_xml(fz_context *ctx, fz_buffer *b, const char *s);
 void pd_json(fz_context *ctx, fz_buffer *b, const char *s);

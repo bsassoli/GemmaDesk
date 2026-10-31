@@ -1,6 +1,7 @@
 """Shared paths, validation and cancellable local processes."""
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 import time
 import numpy as np
@@ -10,6 +11,8 @@ ROOT = APP.parent
 DEFAULT_SOURCE = ROOT / 'Video'
 MODEL = ROOT / 'modelli/embeddinggemma-2'
 RUNTIME = ROOT / 'runtime/llama-b11658'
+GPU_BACKEND = 'metal' if sys.platform == 'darwin' else 'vulkan'
+GPU_LABEL = 'Metal' if GPU_BACKEND == 'metal' else 'Vulkan'
 
 
 class Cancelled(Exception):
